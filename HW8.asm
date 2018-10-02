@@ -4,14 +4,18 @@
 ;
 ; BubbleSort.
 ;
+
 INCLUDE Irvine32.inc
 
 .data
+
 Array     DWORD 1
 ArraySize DWORD 4
 
 .code
+
 BubbleSort PROC USES eax ecx esi, pArray:DWORD, Count:DWORD
+
 	mov  ecx, Count
 	dec  ecx
 L1:
@@ -31,6 +35,7 @@ L3:
 	loop L1
 L4:
 	ret
+	
 BubbleSort ENDP
 
 Delimiters LABEL BYTE
@@ -39,11 +44,11 @@ FORC code,<@#$%^&*!<!>>
 ENDM
 
 main PROC
+
 	push ArraySize
 	push OffSET Array
 	call BubbleSort
 	exit
+
 main ENDP
 END main
-
-
