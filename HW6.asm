@@ -6,6 +6,7 @@
 ; characters and ASM video commands. Utilizes the extended 
 ; ASCII character set.
 ;
+
 .386
 .MODEL flat, stdcall
 
@@ -24,6 +25,7 @@ WriteConsoleA PROTO, handle: DWORD, lpBuffer: PTR BYTE,
 ExitProcess PROTO, dwExitCode: DWORD 
 
 .data
+
 consoleOutHandle  dd ?          ; Windows output handle.
 bytesWritten      dd ?          ; place holder (not used).
 
@@ -41,31 +43,38 @@ LINE_FEED_CHAR    db 0ah        ; ASCII line feed character.
 ; Macro to output a single character to console.
 ;---------------------------------------------------
 mOutChar MACRO Character:REQ
+
 	mov   edx, offset Character
 	call  WriteChar
+
 ENDM
 
 ;---------------------------------------------------
 ; Macro to display top and bottom rows of square.
 ;---------------------------------------------------
 mWriteRow MACRO leftChar:REQ, rightChar:REQ
+
 	mOutChar leftChar           ; display left character for row.
 	mov   ecx, eax              ; loop for rows count.
 	mov   edx, offset ROW_CHAR  ; load edx with straight row.
+
 @@:
 	call  WriteChar             ; write char to console.
 	loop  @B
 	mOutChar rightChar          ; display right character for row.
 	mOutChar LINE_FEED_CHAR
+
 ENDM
 
 ;---------------------------------------------------
 ; Macro to validate register>0 && register<max.
 ;---------------------------------------------------
 mValidate MACRO reg:REQ, max:REQ
+
 	.IF reg >= max || reg == 0
 	  mov reg, max
 	.ENDIF
+
 ENDM
 
 .code
@@ -75,21 +84,24 @@ ENDM
 ; edx = character to display.
 ;---------------------------------------------------
 WriteChar PROC 
-	pushad                      ; save registers.
-	pushfd                      ; save flags.
 
-	cld                         ; clear direction flag.
+	pushad                      ; Save registers.
+	pushfd                      ; Save flags.
+
+	cld                         ; Clear direction flag.
 	INVOKE WriteConsoleA, consoleOutHandle, edx, 1, offset bytesWritten, 0
 
-	popfd                       ; restore flags.
-	popad                       ; restore registers.
+	popfd                       ; Restore flags.
+	popad                       ; Restore registers.
 	ret
+
 WriteChar ENDP
 
 ;---------------------------------------------------
 ; Box drawing function.
 ;---------------------------------------------------
 DrawBox PROC USES ecx edx width_:DWORD, height_:DWORD
+
 	mov  eax, width_           ; Validate width.
 	mValidate eax, MAX_WIDTH
 
@@ -119,12 +131,14 @@ drawColumns:
 drawBottomRow:
 	mWriteRow BOTTOM_LEFT_CHAR, BOTTOM_RIGHT_CHAR
 	ret
+	
 DrawBox ENDP
 
 ;---------------------------------------------------
 ; Main program entry point.
 ;---------------------------------------------------
 main PROC
+
 	; Get console output handle.
 	INVOKE GetStdHandle, STD_OUTPUT_HANDLE
 	mov   consoleOutHandle, eax 
@@ -133,5 +147,6 @@ main PROC
 	INVOKE DrawBox, DEMO_WIDTH, DEMO_HEIGHT
 
 	INVOKE ExitProcess, 0 
+
 main ENDP
 END main
