@@ -1,4 +1,5 @@
 TITLE MASM Template (main.asm)
+
 ; Description: Lab #1 EC
 ; James Eli
 ; 9/3/2018
@@ -10,7 +11,7 @@ TITLE MASM Template (main.asm)
 ; If the difference is negative, print "the second number is greater than the first one".
 ; Turn in by next Monday, complete with test cases and documentation. 
 ; Label: Lab-EC1-name
-;
+
 INCLUDE Irvine32.inc
 
 .data
@@ -27,11 +28,12 @@ resultSmaller BYTE "the second number is greater than the first one", 0dh, 0ah, 
 
 ;---------------------------------------------------
 ; Prompt for user input. Get an integer using Irvine's 
-; ReadInt function. Checks carry flag for validity and 
-; repeats if necessary. Receives nothing. Returns 
+; ReadInt function. Checks overflow flag for validity 
+; and repeats if necessary. Receives nothing. Returns 
 ; integer in eax.
 ;---------------------------------------------------
 GetInput PROC
+
 @@:
 	mov  edx, OFFSET inPrompt      ; Prompt for numerical input.
 	call WriteString               ; Display prompt on console.
@@ -43,25 +45,28 @@ GetInput PROC
 	jmp  @B                        ; Do over.
 @@:
 	ret                            ; Return valid number in eax.
+
 GetInput ENDP
 
 ;---------------------------------------------------
 ; Program entry point.
 ;---------------------------------------------------
 main PROC
-	call Clrscr
+
+call Clrscr
 
 	call GetInput                  ; Get 1st number.
 	mov  ebx, eax                  ; Save number in ebx.
 
 	call GetInput                  ; Get 2nd number.
 	sub  ebx, eax                  ; Add 1st and 2nd number, result in ebx.
-	jno  @F                        ; check for math overflow.
+	jno  @F                        ; Check for math overflow.
 	mov  edx, OFFSET errorPrompt
 	call WriteString               ; Output message on console.
 	jmp  over
+
 @@:
-	cmp  ebx, 0                    ; compare result with 0.
+	cmp  ebx, 0                    ; Compare result with 0.
 	je   equal
 	jg   bigger
 	jl   smaller
@@ -82,5 +87,6 @@ bigger:
 
 over:
 	exit
+
 main ENDP
 END main
