@@ -170,7 +170,7 @@ L1:
 	sub  ebx, edx       ; Remainder -= divisor.
 	add  eax, 1         ; Quotent++.
 
-L2:                         ; Quotent bit == 0.
+L2:	                    ; Quotent bit == 0.
 	loop L1             ; Loop if bits remain.
 
 	ret                 ; eax = quotent, ebx = remainder.
