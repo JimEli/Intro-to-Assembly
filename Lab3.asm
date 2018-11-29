@@ -103,7 +103,7 @@ BoundedRandomRange ENDP
 ;---------------------------------------------------
 getCharacter PROC USES ebx esi
 
-	mov  eax, 2	                ; Get random int (0-1).
+	mov  eax, 2	            ; Get random int (0-1).
 	call RandomRange
 	test eax, 1                 ; Test for 50-50 frequency.
 	jz @F
@@ -137,14 +137,14 @@ createMatrix PROC USES ebx ecx esi matrix:DWORD
 L1:
 	test ecx, 3                 ; Every 4th character?
 	jnz  L2                     ; Nope.
-	add  ebx, 3	                ; Advance to next line.
+	add  ebx, 3                 ; Advance to next line.
 	jmp  L3
 
 L2:
 	inc  ebx                    ; Advance 1 character.
 
 L3:
-	call getCharacter	        ; Get a random character.
+	call getCharacter           ; Get a random character.
 	mov  BYTE PTR[esi+ebx], al  ; Store in matrix.
 	loop L1                     ; Repeat until ecx==0.
 
