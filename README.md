@@ -5,3 +5,5 @@ Homework #6: ASM program that draws a square using ASCII characters and ASM vide
 
 Homework #7: FPU code to calculate:  double P = -M * (N + B);
 
+Homework #8: BubbleSort.
+
