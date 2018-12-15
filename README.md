@@ -11,13 +11,17 @@ Notes:
 * Binary division by shift/subtraction researched here: http://courses.cs.vt.edu/~cs1104/BuildingBlocks/divide.030.html
 
 Lab #3: Array Exercise 10 on pg. 364 of the textbook. Part 1 - Generate an array of formated characters. In a procedure create a print a matrix that writes stores and writes out characters in a format that writes 4 characters per line and for 4 lines. For example:
+```text
    ABCD
    EFGH
    IJKL
    MNOP
-To do this write, create a matrix that can hold all  the letters, and mark the end of the line store a new line character (0Dh, 0Ah). So your array will look something like this "ABCD", 0Dh, 0Ah, "EFGH", 0Dh, 0Ah, etc. Then write the array out with call WriteString. Part 2 - Write out random letters using RandomRange. Using the commands: 
+```
+To do this write, create a matrix that can hold all  the letters, and mark the end of the line store a new line character (0Dh, 0Ah). So your array will look something like this "ABCD", 0Dh, 0Ah, "EFGH", 0Dh, 0Ah, etc. Then write the array out with call WriteString. Part 2 - Write out random letters using RandomRange. Using the commands:
+```C
    mov eax, 26
    call RandomRange ; in the irvine library
+```
 and an array made up of all the letters in the alphabet. Write out a 4X4 matrix that prints out 16 random letters taken from an alphabet matrix you created. Part 3 - Randomly generate vowels or consonants. Using randomRange that selects 0 or 1. If the value is 0, have your list randomly print out a vowel, if the value returned is 1, have a consonant randomly printed out.
 
 Homework #6: ASM program that draws a square using ASCII characters and ASM video commands. Utilizes the extended ASCII character set.
