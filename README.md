@@ -1,5 +1,5 @@
 # Pima-CC-CIS250-Intro-to-Assembly
-## CIS-250 Labs and selected homework assignments.
+## CIS-250 labs and selected homework assignments.
 
 ### Lab #1: Hello World Program. 
 Adaptation of Kip Irvine's Project_sample for CIS 250 Lab #1. Display a simple text message on the console and perform some very basic math on numbers input by user. Checks for signed 32-bit integer overflow.
