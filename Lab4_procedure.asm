@@ -50,7 +50,7 @@ notSpecial:
 	xor  edx, edx    ; Zeroize edx.
 	mov  eax, ebx    ; Reset dividend.
 	div  ecx         ; eax=n/divisor.
-    cmp  edx, 0      ; Remainder?
+    	cmp  edx, 0      ; Remainder?
 	je   @F          ; Remainder==0 means n not prime.
 	dec  ecx         ; Divisor -= 1.
 	jmp  @B          ; Repeat.
